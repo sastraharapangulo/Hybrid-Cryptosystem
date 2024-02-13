@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hybrid Cryptosystem</title>
+    <script src="hillCipher.js"></script>
+    <script src="hillD.js"></script>
+    <script src="rabinP.js"></script>
+    <style>
+      /* Ganti dengan font yang mendukung seluruh karakter ASCII */
+      body {
+        font-family: "Courier New", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>
+        Hybrid Cryptosystem Algoritma Hill Cipher dan Rabin p dalam Pengamanan
+        Database
+      </h1>
+    </div>
+    <div>
+      <p>
+        Ini adalah enkripsi dan dekripsi menggunakan algoritma Hill Cipher dan
+        Rabin p dengan kode ASCII
+      </p>
+      <p>Masukkan kunci untuk algorima Hill Cipher sebanyak 4 karakter</p>
+      <input type="text" id="key" />
+      <p>Masukkan Plaintext</p>
+      <input type="text" id="message" />
+      <button onclick="enkripsi()">enkripsi</button>
+      <button onclick="dekripsi()">dekripsi</button>
+      <p>Matriks kunci :</p>
+      <p id="matriks-kunci"></p>
+      <p>Chipertext :</p>
+      <p id="ciphertext"></p>
+      <p>Ciphertext kunci :</p>
+      <p id="ciphertext-kunci"></p>
+      <p>Plaintext Kunci :</p>
+      <p id="plaintext-kunci"></p>
+    </div>
+    <script>
+      function enkripsi() {
+        var key = document.getElementById("key").value;
+        var message = document.getElementById("message").value;
+
+        const hasil = HillCipher(message, key);
+        console.log("hasil", hasil);
+        var matriksKunci = document.getElementById("matriks-kunci");
+        var ciphertext = document.getElementById("ciphertext");
+        matriksKunci.innerHTML = hasil.matriksKunci;
+        ciphertext.innerText = hasil.ciphertext;
+        const rabin = encryptRabin(key);
+        var ciphertextKunci = document.getElementById("ciphertext-kunci");
+        var plaintextKunci = document.getElementById("plaintext-kunci");
+        ciphertextKunci.innerText = rabin.encryptedText;
+        plaintextKunci.innerText = rabin.decryptedText;
+      }
+      function dekripsi() {
+        var key = document.getElementById("key").value;
+        var message = document.getElementById("message").value;
+
+        const hasil = HillCipherDecrypt(message, key);
+        console.log("hasil", hasil);
+        var matriksKunci = document.getElementById("matriks-kunci");
+        var ciphertext = document.getElementById("ciphertext");
+        matriksKunci.innerHTML = hasil.matriksKunci;
+        ciphertext.innerText = hasil.ciphertext;
+      }
+    </script>
+  </body>
+</html>
